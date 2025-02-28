@@ -1,0 +1,14 @@
+/* global.css*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+  
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* For Internet Explorer */
+    scrollbar-width: none;      /* For Firefox */
+}
