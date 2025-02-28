@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import History from '../components/History'
 import axios from 'axios'
+import { Helmet } from 'react-helmet';
 
 function Home() {
     const [url, setUrl] = useState('');
@@ -20,6 +21,11 @@ function Home() {
 
     return (
         <div>
+            <Helmet>
+                <title>Shorterly</title>
+                <meta name="description" content="Welcome to My URL Shortener, where you can shorten your URLs easily!" />
+                <meta name="keywords" content="URL shortener, shorten links, free URL shortener" />
+            </Helmet>
             <div className="text-gray-800 text-center text-5xl font-bold mt-32">
                 Shorten your links
             </div>
