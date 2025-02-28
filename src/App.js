@@ -22,10 +22,11 @@ function App() {
         </Routes>
 
         {/* Reklamları sağa ve sola ekleyelim */}
-        <div className="absolute top-1/2 left-0 transform -translate-y-1/2 ml-4">
+        <div className="absolute top-1/2 left-0 transform -translate-y-1/2 ml-4 w-1/12">
+
           <GoogleAds />
         </div>
-        <div className="absolute top-1/2 right-0 transform -translate-y-1/2 mr-4">
+        <div className="absolute top-1/2 right-0 transform -translate-y-1/2 mr-4 w-1/12">
           <GoogleAds />
         </div>
       </div>
