@@ -30,15 +30,15 @@ function Navbar() {
         <a href="/qr-generator" className="hover:text-gray-500 px-3 py-2 rounded-full">
           QR Code Generator
         </a>
-        <a href="#" className="hover:text-gray-500 px-3 py-2 rounded-full">
+        <a href="/" className="hover:text-gray-500 px-3 py-2 rounded-full">
           Contact
         </a>
       </div>
       <div className="flex space-x-2">
-        <a href="#" className="rounded-xl bg-gray-800 text-white px-6 py-2">
+        <a href="/" className="rounded-xl bg-gray-800 text-white px-6 py-2">
           Login
         </a>
-        <a href="#" className="rounded-xl bg-[#144EE3] px-6 py-2">
+        <a href="/" className="rounded-xl bg-[#144EE3] px-6 py-2">
           Register Now
         </a>
       </div>
