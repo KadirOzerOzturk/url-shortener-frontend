@@ -26,14 +26,14 @@ function Home() {
                 <meta name="description" content="Welcome to My URL Shortener, where you can shorten your URLs easily!" />
                 <meta name="keywords" content="URL shortener, shorten links, free URL shortener" />
             </Helmet>
-            <div className="text-gray-800 text-center text-5xl font-bold mt-32">
+            <div className="text-gray-800 text-center text-3xl sm:text-5xl font-bold mt-32">
                 Shorten your links
             </div>
-            <div className="text-gray-800 text-center text-2xl mt-4">
+            <div className="text-gray-800 text-center text-xl sm:text-2xl mt-4">
                 Paste your long URL below
             </div>
             <div className="flex justify-center mt-4">
-                <div className="relative w-1/3">
+                <div className="relative w-11/12 sm:w-1/3">
                     <input
                         type="text"
                         className="rounded-full px-4 h-16 py-2 w-full pr-16 bg-gray-800 text-slate-400"

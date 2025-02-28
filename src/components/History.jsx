@@ -29,16 +29,16 @@ function History({ isShortened }) {
           </div>
         </div>
       ) : (
-        <div className="bg-gradient-to-r from-pink-500 to-yellow-400 hide-scrollbar overflow-y-auto w-2/3 mt-8 max-h-96 rounded-2xl shadow-2xl p-4 border-4 border-white custom-scrollbar">
+        <div className="bg-gradient-to-r from-pink-500 to-yellow-400 hide-scrollbar overflow-x-auto w-11/12 sm:w-2/3 mt-8 max-h-96 rounded-2xl shadow-2xl p-4 border-4 border-white custom-scrollbar">
           <table className="w-full border-collapse border border-white">
             <thead>
               <tr className="bg-purple-700 text-yellow-200 text-lg rounded-xl">
                 <th className="py-3 px-6 border-b-2 border-white text-nowrap">🔗 Short URL</th>
-                <th className="py-3 px-6 border-b-2 border-white text-nowrap">🌍 Original URL</th>
-                <th className="py-3 px-6 border-b-2 border-white text-nowrap">📸 QR</th>
-                <th className="py-3 px-6 border-b-2 border-white text-nowrap">📊 Clicks</th>
-                <th className="py-3 px-6 border-b-2 border-white text-nowrap">✅ Status</th>
-                <th className="py-3 px-6 border-b-2 border-white text-nowrap">📅 Expire Date</th>
+                <th className="py-3 px-6 border-b-2 border-white text-nowrap hidden md:table-cell">🌍 Original URL</th>
+                <th className="py-3 px-6 border-b-2 border-white text-nowrap hidden xl:table-cell">📸 QR</th>
+                <th className="py-3 px-6 border-b-2 border-white text-nowrap hidden xl:table-cell">📊 Clicks</th>
+                <th className="py-3 px-6 border-b-2 border-white text-nowrap hidden lg:table-cell">✅ Status</th>
+                <th className="py-3 px-6 border-b-2 border-white text-nowrap hidden xl:table-cell">📅 Expire Date</th>
               </tr>
             </thead>
             <tbody>
@@ -48,11 +48,11 @@ function History({ isShortened }) {
                   className="bg-yellow-100 text-purple-800 text-lg font-semibold hover:bg-yellow-300 transition-all duration-300"
                 >
                   <td className="p-4 border border-white text-nowrap">{shortUrl.shortened_url}</td>
-                  <td className="p-4 border border-white max-w-xs overflow-x-auto whitespace-nowrap hide-scrollbar">{shortUrl.original_url}</td>
-                  <td className="p-4 border border-white text-nowrap">{shortUrl.qr ? shortUrl.qr : "-"}</td>
-                  <td className="p-4 border border-white text-nowrap">{shortUrl.usage_count}</td>
-                  <td className="p-4 border border-white text-nowrap">{shortUrl.status ? shortUrl.status : "Active"}</td>
-                  <td className="p-4 border border-white text-nowrap">{moment(shortUrl.expires_at).format("DD.MM.YYYY hh:mm:ss Z")}</td>
+                  <td className="p-4 border border-white max-w-xs overflow-x-auto whitespace-nowrap hide-scrollbar hidden md:table-cell">{shortUrl.original_url}</td>
+                  <td className="p-4 border border-white text-nowrap hidden xl:table-cell">{shortUrl.qr ? shortUrl.qr : "-"}</td>
+                  <td className="p-4 border border-white text-nowrap hidden xl:table-cell">{shortUrl.usage_count}</td>
+                  <td className="p-4 border border-white text-nowrap hidden lg:table-cell">{shortUrl.status ? shortUrl.status : "Active"}</td>
+                  <td className="p-4 border border-white text-nowrap hidden xl:table-cell">{moment(shortUrl.expires_at).format("DD.MM.YYYY hh:mm:ss Z")}</td>
                 </tr>
               ))}
             </tbody>
@@ -63,4 +63,4 @@ function History({ isShortened }) {
   )
 }
 
-export default History
+export default History;
