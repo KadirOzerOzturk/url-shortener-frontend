@@ -17,9 +17,11 @@ function History({ isShortened }) {
     })
   }, [isShortened])
   // sort as created_at desc
-  shortUrls.sort((a, b) => {
-    return new Date(b.created_at) - new Date(a.created_at)
-  })
+  if (shortUrls.length > 0) {
+    shortUrls.sort((a, b) => {
+      return new Date(b.created_at) - new Date(a.created_at)
+    })
+  }
   
   
 
