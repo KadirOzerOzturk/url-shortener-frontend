@@ -1,27 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function GoogleAds() {
+  const adRef = useRef(null);
+  const isPushed = useRef(false); // Track if adsbygoogle.push() has already been called
+
   useEffect(() => {
-    // Google Ads scriptini yüklemek
-    const script = document.createElement("script");
-    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    script.onload = () => {
-      // Script yüklendikten sonra adsbygoogle.push() fonksiyonunu çağırıyoruz
-      if (window.adsbygoogle) {
-        window.adsbygoogle.push({});
-      }
-    };
+    if (!window.adsbygoogle) {
+      // Load the AdSense script only once
+      const script = document.createElement("script");
+      script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      script.onload = () => {
+        if (adRef.current && !isPushed.current) {
+          window.adsbygoogle = window.adsbygoogle || [];
+          window.adsbygoogle.push({});
+          isPushed.current = true; // Mark ads as initialized
+        }
+      };
 
-    document.body.appendChild(script);
-
-    return () => {
-      // Component unmount olduğunda scripti kaldırıyoruz
-      document.body.removeChild(script);
-    };
-  }, []); // useEffect sadece component mount olduğunda çalışacak
-
+      document.body.appendChild(script);
+    } else if (adRef.current && !isPushed.current) {
+      // If script is already loaded, just push ads once
+      window.adsbygoogle.push({});
+      isPushed.current = true;
+    }
+  }, []);
   return (
     <div>
       <ins
@@ -36,6 +40,7 @@ function GoogleAds() {
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
+      
     </div>
   );
 }
