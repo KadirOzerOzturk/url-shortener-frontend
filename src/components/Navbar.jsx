@@ -24,9 +24,9 @@ function Navbar() {
         {/* Logo */}
         <a
           href="/"
-          className="font-bold text-4xl tracking-wide mx-4 bg-gradient-to-r from-purple-700 via-[#144EE3] to-indigo-200 inline-block text-transparent bg-clip-text"
+          className="font-bold text-4xl tracking-wide mx-4 bg-gradient-to-r from-purple-700 to-[#FBD8C4]  inline-block text-transparent bg-clip-text"
         >
-          Link
+          Shorterly
         </a>
 
         {/* Desktop Menu */}

@@ -9,7 +9,7 @@ function Home() {
     const [isShortened, setIsShortened] = useState(false);
 
     const shorten = (e) => {
-        axios.post('/url/shorten', { original_url: url })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/url/shorten`, { original_url: url })
             .then((response) => {
                 setShortenedUrl(response.data.shortened_url); // Update the shortened URL
                 setIsShortened(true)

@@ -1,12 +1,14 @@
 import axios from 'axios'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function History({ isShortened }) {
   const [shortUrls, setShortUrls] = useState([])
-
+  const navigate = useNavigate()
+  console.log(process.env.REACT_APP_BASE_URL)
   useEffect(() => {
-    axios.get('/url').then((response) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/url`).then((response) => {
       // Ensure response.data is an array
       setShortUrls(Array.isArray(response.data) ? response.data : [])
     }).catch((error) => {
@@ -18,6 +20,7 @@ function History({ isShortened }) {
   const sortedShortUrls = Array.isArray(shortUrls) ? [...shortUrls].sort((a, b) => {
     return new Date(b.created_at) - new Date(a.created_at)
   }) : []
+
 
   return (
     <div className="flex justify-center items-center text-center rounded-full">
@@ -47,7 +50,7 @@ function History({ isShortened }) {
                   key={index}
                   className="bg-yellow-100 text-purple-800 text-lg font-semibold hover:bg-yellow-300 transition-all duration-300"
                 >
-                  <td className="p-4 border border-white text-nowrap">{shortUrl.shortened_url}</td>
+                  <td className="p-4 border border-white text-nowrap"><a onClick={() => navigate(`/io/${shortUrl.shortened_url}`)}>https://shorterly.net/io/{shortUrl.shortened_url}</a></td>
                   <td className="p-4 border border-white max-w-xs overflow-x-auto whitespace-nowrap hide-scrollbar hidden md:table-cell">{shortUrl.original_url}</td>
                   <td className="p-4 border border-white text-nowrap hidden xl:table-cell">{shortUrl.qr ? shortUrl.qr : "-"}</td>
                   <td className="p-4 border border-white text-nowrap hidden xl:table-cell">{shortUrl.usage_count}</td>

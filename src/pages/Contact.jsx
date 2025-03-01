@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import contactus from "../assets/contactus.png"
+import axios from 'axios'
 function Contact() {
     const [form, setForm] = useState({
         name: "",
@@ -12,12 +13,23 @@ function Contact() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(form)
-        setForm({
-            name: "",
-            email: "",
-            message: ""
-        })
+        try {
+            axios.post(`${process.env.REACT_APP_BASE_URL}/mail/send`, form).then((res) => {
+                if (res.status === 200) {
+                    alert('Message sent successfully!')
+                    setForm({
+                        name: "",
+                        email: "",
+                        message: ""
+                    })
+                }
+            }
+            )
+
+        }  catch (error) {
+            alert('Something went wrong! Please try again later')
+        }
+        
     }
     return (
         <div className="flex items-center justify-center w-full min-h-screen p-4">
