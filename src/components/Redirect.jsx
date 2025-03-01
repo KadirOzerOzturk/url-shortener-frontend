@@ -6,20 +6,17 @@ const Redirect = () => {
   const { shortUrl } = useParams();
 
   useEffect(() => {
+    // Fetch the long URL associated with the short URL
     const fetchLongUrl = async () => {
       try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/url/${shortUrl}`);
         
-        axios.get(`${process.env.REACT_APP_BASE_URL}/url/${shortUrl}`).then((response) => {
-            if (response.data.originalUrl) {
-              } else {
-                console.error("Hata: Orijinal URL bulunamadı");
-              }
-            })
-            .catch((error) => {
-              console.error("Hata:", error);
-            });
+        if (response.data && response.data.originalUrl) {
+          window.location.href = response.data.originalUrl;
+        } else {
+          console.error("Hata: Orijinal URL bulunamadı");
         }
-       catch (error) {
+      } catch (error) {
         console.error("Hata:", error);
       }
     };
@@ -27,11 +24,11 @@ const Redirect = () => {
     if (shortUrl) {
       fetchLongUrl();
     }
-  }, [shortUrl]);
+  }, [shortUrl]); 
 
   return (
-    <div  className="flex items-center justify-center w-full min-h-screen p-4">
-        <p className="text-3xl">Redirecting...</p>
+    <div className="flex items-center justify-center w-full min-h-screen p-4">
+      <p className="text-3xl">Redirecting...</p>
     </div>
   );
 };

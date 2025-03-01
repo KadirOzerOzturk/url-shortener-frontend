@@ -9,7 +9,6 @@ function History({ isShortened }) {
   console.log(process.env.REACT_APP_BASE_URL)
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/url`).then((response) => {
-      // Ensure response.data is an array
       setShortUrls(Array.isArray(response.data) ? response.data : [])
     }).catch((error) => {
       console.error(error)
@@ -50,7 +49,7 @@ function History({ isShortened }) {
                   key={index}
                   className="bg-yellow-100 text-purple-800 text-lg font-semibold hover:bg-yellow-300 transition-all duration-300"
                 >
-                  <td className="p-4 border border-white text-nowrap"><a onClick={() => navigate(`/io/${shortUrl.shortened_url}`)}>https://shorterly.net/io/{shortUrl.shortened_url}</a></td>
+                  <td className="p-4 border border-white text-nowrap"><a href={`/io/${shortUrl.shortened_url}`} onClick={(e) => { e.preventDefault(); navigate(`/io/${shortUrl.shortened_url}`); }}>https://shorterly.net/io/{shortUrl.shortened_url}</a></td>
                   <td className="p-4 border border-white max-w-xs overflow-x-auto whitespace-nowrap hide-scrollbar hidden md:table-cell">{shortUrl.original_url}</td>
                   <td className="p-4 border border-white text-nowrap hidden xl:table-cell">{shortUrl.qr ? shortUrl.qr : "-"}</td>
                   <td className="p-4 border border-white text-nowrap hidden xl:table-cell">{shortUrl.usage_count}</td>

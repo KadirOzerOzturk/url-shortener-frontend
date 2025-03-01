@@ -2,35 +2,45 @@ import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import contactus from "../assets/contactus.png"
 import axios from 'axios'
+
 function Contact() {
+    const [info, setInfo] = useState("");
+    const [error, setError] = useState("");
     const [form, setForm] = useState({
         name: "",
-        email: "",
-        message: ""
-    })
+        from: "",
+        to: "oztrkkadirozer@gmail.com",
+        body: "",
+        subject: ""
+    });
+
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        try {
-            axios.post(`${process.env.REACT_APP_BASE_URL}/mail/send`, form).then((res) => {
-                if (res.status === 200) {
-                    alert('Message sent successfully!')
-                    setForm({
-                        name: "",
-                        email: "",
-                        message: ""
-                    })
-                }
-            }
-            )
 
-        }  catch (error) {
-            alert('Something went wrong! Please try again later')
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const requestData = { ...form };
+            requestData.subject = requestData.body;
+
+
+            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/mail/send`, requestData);
+
+            if (res.status === 200) {
+                setInfo("Email sent successfully!");
+                setForm({
+                    name: "",
+                    from: "",
+                    body: "",
+                    subject: ""
+                });
+            }
+        } catch (error) {
+            setError('Something went wrong! Please try again later');
         }
-        
     }
+
     return (
         <div className="flex items-center justify-center w-full min-h-screen p-4">
             <Helmet>
@@ -46,10 +56,38 @@ function Contact() {
             <div className='bg-[#FBD8C4] w-full max-w-4xl rounded-lg p-8 flex flex-col md:flex-row'>
                 <form className='w-full md:w-1/2'>
                     <h1 className='text-2xl font-bold mb-4'>Contact Us</h1>
-                    <input type="text" placeholder='Name' className='w-full h-12 px-4 mb-4 rounded-lg' onChange={handleChange} name="name" value={form.name} />
-                    <input type="email" placeholder='Email' className='w-full h-12 px-4 mb-4 rounded-lg' onChange={handleChange} name="email" value={form.email} />
-                    <textarea placeholder='Message' className='w-full   max-h-32 px-4 mb-4 py-2 rounded-lg' onChange={handleChange} name="message" value={form.message}></textarea>
-                    <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg' onClick={handleSubmit}>Submit</button>
+                    <input
+                        type="text"
+                        placeholder='Name'
+                        className='w-full h-12 px-4 mb-4 rounded-lg'
+                        onChange={handleChange}
+                        name="name"
+                        value={form.name}
+                    />
+                    <input
+                        type="from"
+                        placeholder='Email'
+                        className='w-full h-12 px-4 mb-4 rounded-lg'
+                        onChange={handleChange}
+                        name="from"
+                        value={form.email}
+                    />
+                    <textarea
+                        placeholder='Message'
+                        className='w-full max-h-32 px-4 mb-4 py-2 rounded-lg'
+                        onChange={handleChange}
+                        name="body"
+                        value={form.body}
+                    ></textarea>
+                    <button
+                        type='submit'
+                        className='bg-blue-500 text-white px-4 py-2 rounded-lg'
+                        onClick={handleSubmit}
+                    >
+                        Submit
+                    </button>
+                    {info && <p className="mt-4 text-green-500">{info}</p>}
+                    {error && <p className="mt-4 text-red-500">{error}</p>}
                 </form>
                 <img
                     src={contactus}
