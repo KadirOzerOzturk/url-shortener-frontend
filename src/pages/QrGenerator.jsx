@@ -13,7 +13,7 @@ function QrGenerator() {
     const handleGenerate = () => {
         setQrKey((prev) => prev + 1); // QR kodunu yenilemek için key değiştir
     };
-
+    
     return (
         <div className="flex flex-col items-center justify-center w-full min-h-screen ">
             <Helmet>
@@ -53,7 +53,7 @@ function QrGenerator() {
                         </button>
                     </div>
                 </div>
-                <div className="flex justify-center mt-6 w-full px-4">
+                <div className=" flex-col md:flex justify-center mt-6 w-full px-4">
 
                     {/* QR Kod Özelleştirme Paneli */}
                     <div className="mt-10 bg-gray-100 p-6 rounded-lg shadow-md">
@@ -124,6 +124,7 @@ function QrGenerator() {
                                 style={{ padding: `${padding}px`, backgroundColor: bgColor }}
                             />
                             <div className="text-gray-600 mt-2">Your QR Code</div>
+                            <button onClick={handleDownload} className="border-2 px-2 py-1 rounded-full border-black" >İndir</button>
                         </div>
                     )}
                 </div>
