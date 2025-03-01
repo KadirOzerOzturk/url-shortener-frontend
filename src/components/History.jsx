@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 function History({ isShortened }) {
   const [shortUrls, setShortUrls] = useState([])
   const navigate = useNavigate()
-  console.log(process.env.REACT_APP_BASE_URL)
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/url`).then((response) => {
       setShortUrls(Array.isArray(response.data) ? response.data : [])
