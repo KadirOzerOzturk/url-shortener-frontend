@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import bg from "./assets/playfull-bg.jpg";
-import GoogleAds from "./components/GoogleAds";
 import QrGenerator from "./pages/QrGenerator"; // Yeni sayfanın importu
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
@@ -22,13 +21,15 @@ function App() {
           <Route path="/qr-generator" element={<QrGenerator />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-
-        <div className="absolute top-1/2 left-0 transform -translate-y-1/2 ml-4 hidden md:block">
+      {/*
+      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 ml-4 hidden md:block">
           <GoogleAds />
         </div>
         <div className="absolute top-1/2 right-0 transform -translate-y-1/2 mr-4 hidden md:block">
           <GoogleAds />
         </div>
+      */ }
+        
       </div>
     </div>
   );
