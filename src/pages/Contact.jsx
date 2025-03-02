@@ -24,7 +24,6 @@ function Contact() {
             const requestData = { ...form };
             requestData.subject = requestData.body;
 
-
             const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/mail/send`, requestData);
 
             if (res.status === 200) {
@@ -44,13 +43,14 @@ function Contact() {
     return (
         <div className="flex items-center justify-center w-full min-h-screen p-4">
             <Helmet>
-                <title>Contact Us</title>
-                <meta name="description" content="Get in touch with us for any queries or support related to our QR Code Generator." />
-                <meta name="keywords" content="Contact, QR Code support, QR code generator help, customer support" />
+                <title>Contact Us - Shorterly</title>
+                <meta name="description" content="Get in touch with us for any queries or support related to Shorterly's URL Shortener and QR Code Generator." />
+                <meta name="keywords" content="Contact, QR Code support, URL shortener help, customer support" />
                 <meta name="robots" content="index, follow" />
-                <meta property="og:title" content="Contact Us - QR Code Generator" />
-                <meta property="og:description" content="Get in touch with us for any queries or support related to our QR Code Generator." />
-                <meta property="og:image" content="URL_TO_YOUR_CONTACT_IMAGE" />
+                <meta property="og:title" content="Contact Us - Shorterly" />
+                <meta property="og:description" content="Get in touch with us for any queries or support related to Shorterly's URL Shortener and QR Code Generator." />
+                <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
+
                 <meta property="og:url" content="https://www.shorterly.net/contact" />
             </Helmet>
             <div className='bg-[#FBD8C4] w-full max-w-4xl rounded-lg p-8 flex flex-col md:flex-row'>
@@ -103,4 +103,4 @@ function Contact() {
     )
 }
 
-export default Contact
+export default Contact;

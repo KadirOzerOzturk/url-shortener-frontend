@@ -9,7 +9,7 @@ function QrGenerator() {
     const [bgColor, setBgColor] = useState("#ffffff");
     const [padding, setPadding] = useState(10);
     const [qrKey, setQrKey] = useState(0);
-    const qrRef = useRef(null); // QR kodunu refere etmek için
+    const qrRef = useRef(null);
 
     const handleGenerate = () => {
         setQrKey((prev) => prev + 1);
@@ -20,23 +20,24 @@ function QrGenerator() {
             const canvas = qrRef.current.querySelector("canvas");
             if (canvas) {
                 const link = document.createElement("a");
-                link.href = canvas.toDataURL("image/png"); // PNG formatında indirme
-                link.download = "QRCode.png"; // Dosya adı
+                link.href = canvas.toDataURL("image/png");
+                link.download = "QRCode.png";
                 link.click();
             }
         }
     };
 
     return (
-        <div className="flex flex-col items-center justify-center w-full mt-24  ">
+        <div className="flex flex-col items-center justify-center w-full mt-24">
             <Helmet>
-                <title>QR Code Generator</title>
-                <meta name="description" content="Generate QR codes for your URLs quickly and easily with our QR Code Generator." />
+                <title>QR Code Generator - Shorterly</title>
+                <meta name="description" content="Generate QR codes for your URLs quickly and easily with Shorterly's QR Code Generator." />
                 <meta name="keywords" content="QR Code, URL to QR, QR code generator, free QR code, create QR code" />
                 <meta name="robots" content="index, follow" />
-                <meta property="og:title" content="QR Code Generator" />
-                <meta property="og:description" content="Generate QR codes for your URLs quickly and easily with our QR Code Generator." />
-                <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
+                <meta property="og:title" content="QR Code Generator - Shorterly" />
+                <meta property="og:description" content="Generate QR codes for your URLs quickly and easily with Shorterly's QR Code Generator." />
+                <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
+
                 <meta property="og:url" content="https://www.shorterly.net/qr-generator" />
             </Helmet>
 

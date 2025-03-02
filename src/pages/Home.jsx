@@ -22,9 +22,14 @@ function Home() {
     return (
         <div>
             <Helmet>
-                <title>Shorterly</title>
-                <meta name="description" content="Welcome to My URL Shortener, where you can shorten your URLs easily!" />
+                <title>Shorterly - URL Shortener</title>
+                <meta name="description" content="Welcome to Shorterly, where you can shorten your URLs easily and quickly!" />
                 <meta name="keywords" content="URL shortener, shorten links, free URL shortener" />
+                <meta name="robots" content="index, follow" />
+                <meta property="og:title" content="Shorterly - URL Shortener" />
+                <meta property="og:description" content="Welcome to Shorterly, where you can shorten your URLs easily and quickly!" />
+                <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
+                <meta property="og:url" content="https://www.shorterly.net" />
             </Helmet>
             <div className="text-gray-800 text-center text-3xl sm:text-5xl font-bold mt-32">
                 Shorten your links
@@ -46,14 +51,12 @@ function Home() {
                 </div>
             </div>
 
-            {/* Display the shortened URL */}
             {shortenedUrl && (
                 <div className="mt-4 text-center text-xl text-gray-700">
                     <p>Shortened URL: <a href={shortenedUrl} target="_blank" rel="noopener noreferrer" className="text-purple-700">{shortenedUrl}</a></p>
                 </div>
             )}
 
-            {/* Pass the history array to the History component */}
             <History isShortened={isShortened} />
         </div>
     );

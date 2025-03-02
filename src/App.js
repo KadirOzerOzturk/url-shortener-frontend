@@ -5,10 +5,21 @@ import QrGenerator from "./pages/QrGenerator";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Redirect from "./components/Redirect";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
     <div className="relative h-screen w-screen bg-cover bg-center font-KG">
+      <Helmet>
+        <title>Shorterly - URL Shortener & QR Code Generator</title>
+        <meta name="description" content="Shorterly is a powerful URL shortener and QR code generator. Shorten your links and generate QR codes easily!" />
+        <meta name="keywords" content="URL shortener, QR code generator, shorten links, free URL shortener, create QR code" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Shorterly - URL Shortener & QR Code Generator" />
+        <meta property="og:description" content="Shorterly is a powerful URL shortener and QR code generator. Shorten your links and generate QR codes easily!" />
+        <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
+        <meta property="og:url" content="https://www.shorterly.net" />
+      </Helmet>
       <img
         src={bg}
         alt="background"
@@ -22,17 +33,7 @@ function App() {
           <Route path="/qr-generator" element={<QrGenerator />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/io/:shortUrl" element={<Redirect  />} /> 
-
         </Routes>
-      {/*
-      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 ml-4 hidden md:block">
-          <GoogleAds />
-        </div>
-        <div className="absolute top-1/2 right-0 transform -translate-y-1/2 mr-4 hidden md.block">
-          <GoogleAds />
-        </div>
-      */ }
-        
       </div>
     </div>
   );
