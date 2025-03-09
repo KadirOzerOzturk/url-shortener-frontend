@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const {user,isAuthenticated} = useSelector(state => state.auth);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -12,6 +13,12 @@ function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  useEffect(() => {
+    
+  }
+  , [isAuthenticated]);
+
+
 
   return (
     <div>
@@ -46,14 +53,24 @@ function Navbar() {
         </div>
 
         {/* Desktop Login/Register Buttons */}
-        <div className="hidden sm:flex space-x-2">
-          <a href="/" className="rounded-xl bg-gray-800 text-white px-6 py-2">
-            Login
+        {isAuthenticated ? (
+          <a href="/profile" className="rounded-xl bg-gray-800 text-white px-6 py-2">
+            My Profile
           </a>
-          <a href="/" className="rounded-xl bg-[#144EE3] px-6 py-2 text-white">
-            Register Now
-          </a>
-        </div>
+        ) : (
+          <div className="hidden sm:flex space-x-2">
+            <a href="/login" className="rounded-xl bg-gray-800 text-white px-6 py-2">
+              Login
+            </a>
+            <a href="/register" className="rounded-xl bg-[#144EE3] px-6 py-2 text-white">
+              Register Now
+            </a>
+          </div>
+        )}
+
+        
+       
+       
 
         {/* Mobile Menu Button */}
         <div className="sm:hidden flex items-center">
@@ -113,12 +130,21 @@ function Navbar() {
             Contact
           </a>
           <hr />
-          <a href="/" className="rounded-lg bg-gray-800 text-white px-6 py-2 text-center">
-            Login
-          </a>
-          <a href="/" className="rounded-lg bg-[#144EE3] text-white px-6 py-2 text-center">
-            Register Now
-          </a>
+          {isAuthenticated ? (
+            <a href="/profile" className="rounded-lg bg-gray-800 text-white px-6 py-2 text-center">
+              My Profile
+            </a>
+          ) : (
+            <div className="flex space-x-2">
+              <a href="/login" className="rounded-lg bg-gray-800 text-white px-6 py-2 text-center">
+                Login
+              </a>
+              <a href="/register" className="rounded-lg bg-[#144EE3] text-white px-6 py-2 text-center">
+                Register Now
+              </a>
+            </div>
+          )}
+         
         </div>
       </div>
     </div>

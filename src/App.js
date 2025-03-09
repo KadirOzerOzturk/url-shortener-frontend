@@ -6,6 +6,9 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Redirect from "./components/Redirect";
 import { Helmet } from "react-helmet";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
           <Route path="/qr-generator" element={<QrGenerator />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/io/:shortUrl" element={<Redirect  />} /> 
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </div>
