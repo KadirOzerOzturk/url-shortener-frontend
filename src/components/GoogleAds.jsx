@@ -35,8 +35,8 @@ function GoogleAds() {
           width: "300px",  // Genişlik
           height: "250px", // Yükseklik
         }}
-        data-ad-client="ca-pub-3367723680642426" // AdSense client ID'niz
-        data-ad-slot="1006343378"  // Slot ID'niz
+        data-ad-client="ca-pub-3367723680642426" 
+        data-ad-slot="1006343378"  
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>

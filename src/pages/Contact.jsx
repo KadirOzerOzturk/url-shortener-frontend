@@ -43,46 +43,48 @@ function Contact() {
     return (
         <div className="flex items-center justify-center w-full min-h-screen p-4">
             <Helmet>
-                <title>Contact Us - Shorterly</title>
-                <meta name="description" content="Get in touch with us for any queries or support related to Shorterly's URL Shortener and QR Code Generator." />
-                <meta name="keywords" content="Contact, QR Code support, URL shortener help, customer support" />
+                <title>Contact Shorterly Support - Help with URL Shortening & QR Code Generation</title>
+                <meta name="description" content="Contact Shorterly for support related to URL shortening or QR code generation. Get help from our expert team." />
+                <meta name="keywords" content="Contact, URL Shortener, QR Code support, customer support, Shorterly" />
                 <meta name="robots" content="index, follow" />
-                <meta property="og:title" content="Contact Us - Shorterly" />
-                <meta property="og:description" content="Get in touch with us for any queries or support related to Shorterly's URL Shortener and QR Code Generator." />
+                <meta property="og:title" content="Contact Shorterly Support" />
+                <meta property="og:description" content="Need help? Contact Shorterly for URL shortening or QR code issues." />
                 <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
-
                 <meta property="og:url" content="https://www.shorterly.net/contact" />
             </Helmet>
             <div className='bg-[#FBD8C4] w-full max-w-4xl rounded-lg p-8 flex flex-col md:flex-row'>
-                <form className='w-full md:w-1/2'>
+                <form className='w-full md:w-1/2' onSubmit={handleSubmit}>
                     <h1 className='text-2xl font-bold mb-4'>Contact Us</h1>
+                    <p className="mb-6 text-lg">If you have any questions or need assistance with Shorterly's services, feel free to reach out to our support team. We're here to help with URL shortening, QR code generation, and anything related to our platform.</p>
                     <input
                         type="text"
-                        placeholder='Name'
+                        placeholder='Your Name'
                         className='w-full h-12 px-4 mb-4 rounded-lg'
                         onChange={handleChange}
                         name="name"
                         value={form.name}
+                        required
                     />
                     <input
-                        type="from"
-                        placeholder='Email'
+                        type="email"
+                        placeholder='Your Email'
                         className='w-full h-12 px-4 mb-4 rounded-lg'
                         onChange={handleChange}
                         name="from"
-                        value={form.email}
+                        value={form.from}
+                        required
                     />
                     <textarea
-                        placeholder='Message'
+                        placeholder='Your Message'
                         className='w-full max-h-32 px-4 mb-4 py-2 rounded-lg'
                         onChange={handleChange}
                         name="body"
                         value={form.body}
+                        required
                     ></textarea>
                     <button
                         type='submit'
                         className='bg-blue-500 text-white px-4 py-2 rounded-lg'
-                        onClick={handleSubmit}
                     >
                         Submit
                     </button>

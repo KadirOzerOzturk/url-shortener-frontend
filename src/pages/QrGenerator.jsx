@@ -1,5 +1,5 @@
+import React, { useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
-import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 
 function QrGenerator() {
@@ -28,16 +28,15 @@ function QrGenerator() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center w-full mt-24">
+        <div className="flex flex-col items-center justify-center w-full mt-24 px-4">
             <Helmet>
                 <title>QR Code Generator - Shorterly</title>
-                <meta name="description" content="Generate QR codes for your URLs quickly and easily with Shorterly's QR Code Generator." />
-                <meta name="keywords" content="QR Code, URL to QR, QR code generator, free QR code, create QR code" />
+                <meta name="description" content="Generate high-quality QR codes for your URLs quickly and easily with Shorterly's QR Code Generator. Customize your QR codes with colors, sizes, and padding!" />
+                <meta name="keywords" content="QR Code, URL to QR, QR code generator, free QR code, create QR code, QR customization" />
                 <meta name="robots" content="index, follow" />
                 <meta property="og:title" content="QR Code Generator - Shorterly" />
-                <meta property="og:description" content="Generate QR codes for your URLs quickly and easily with Shorterly's QR Code Generator." />
+                <meta property="og:description" content="Create and customize QR codes effortlessly with Shorterly. Convert your links into scannable QR codes instantly!" />
                 <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
-
                 <meta property="og:url" content="https://www.shorterly.net/qr-generator" />
             </Helmet>
 
@@ -46,17 +45,17 @@ function QrGenerator() {
                     QR Code Generator
                 </div>
                 <div className="text-gray-800 text-center text-2xl mt-4">
-                    Generate your QR code
+                    Convert your URL into a QR Code instantly!
                 </div>
 
-                <div className="flex justify-center mt-6 w-full px-4">
+                <div className="flex justify-center mt-6 w-full">
                     <div className="relative w-full max-w-lg">
                         <input
                             type="text"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                             className="rounded-full px-4 h-16 py-2 w-full pr-20 bg-gray-800 text-slate-400"
-                            placeholder="https://example.com"
+                            placeholder="Enter your URL here..."
                         />
                         <button
                             onClick={handleGenerate}
@@ -66,10 +65,11 @@ function QrGenerator() {
                         </button>
                     </div>
                 </div>
-                <div className="flex flex-col md:flex-row justify-center mt-6 w-full px-4">
+
+                <div className="flex flex-col md:flex-row justify-center mt-6 w-full">
                     <div className="mt-10 bg-gray-100 p-6 rounded-lg shadow-md">
                         <div className="text-gray-800 text-xl font-semibold mb-4">
-                            Customize QR Code
+                            Customize Your QR Code
                         </div>
 
                         <div className="flex justify-between">

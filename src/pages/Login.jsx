@@ -5,18 +5,20 @@ import { Helmet } from 'react-helmet';
 import loginIcon from "../assets/Login-amico.png";
 import { login } from '../store/auth';
 import { useNavigate } from 'react-router-dom';
+
 function Login() {
     const [form, setForm] = useState({
         email: "",
         password: ""
     });
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
     const [info, setInfo] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [pendingApiCall, setPendingApiCall] = useState(false);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -30,23 +32,19 @@ function Login() {
 
             if (res.status === 200) {
                 setInfo("Logged in successfully!");
-                setForm({
-                    email: "",
-                    password: ""
-                });
+                setForm({ email: "", password: "" });
                 setError("");
                 dispatch(login(res.data.user));
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 navigate("/profile");
-                setPendingApiCall(false);
             }
         } catch (error) {
             console.error(error);
             setError(error.response?.data?.message || 'Something went wrong! Please try again later');
             setInfo("");
+        } finally {
             setPendingApiCall(false);
         }
-
     };
 
     const toggleShowPassword = () => {
@@ -57,8 +55,8 @@ function Login() {
         <div className="flex items-center justify-center w-full min-h-screen p-4">
             <Helmet>
                 <title>Login - Shorterly</title>
-                <meta name="description" content="Login to Shorterly to access your URL shortener and QR code generator dashboard." />
-                <meta name="keywords" content="Login, URL shortener, QR code generator, Shorterly" />
+                <meta name="description" content="Login to Shorterly to access your URL shortener and QR code generator dashboard. Secure and easy login for a seamless experience." />
+                <meta name="keywords" content="Login, URL shortener, QR code generator, Shorterly, Account Login" />
                 <meta name="robots" content="index, follow" />
                 <meta property="og:title" content="Login - Shorterly" />
                 <meta property="og:description" content="Login to Shorterly to access your URL shortener and QR code generator dashboard." />
@@ -67,9 +65,8 @@ function Login() {
             </Helmet>
 
             <div className='bg-[#FBD8C4] w-full max-w-4xl rounded-lg p-8 flex flex-col md:flex-row'>
-                <form className='w-full md:w-1/2'>
+                <form className='w-full md:w-1/2' onSubmit={handleSubmit}>
                     <h1 className='text-2xl font-bold mb-4 text-center'>Login</h1>
-
                     <input
                         type="email"
                         placeholder='Email'
@@ -95,38 +92,24 @@ function Login() {
                             {showPassword ? "Hide" : "Show"}
                         </button>
                     </div>
-                    {
-                        pendingApiCall ? (
-                            <button
-                                type='button'
-                                className='bg-blue-500 text-white px-4 py-2 rounded-lg'
-                                disabled
-                            >
-                                Logging in...
-                            </button>
-                        ) : (
-                            <button
-                                type='submit'
-                                className='bg-blue-500 text-white px-4 py-2 rounded-lg'
-                                onClick={handleSubmit}
-                            >
-                                Login
-                            </button>
-                        )
 
-                    }
+                    {pendingApiCall ? (
+                        <button
+                            className='bg-gray-500 hover:bg-gray-600 text-white w-full py-2 rounded-lg'
+                            disabled
+                        >
+                            Loading...
+                        </button>
+                    ) : (
+                        <button type="submit" className='bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded-lg'>
+                            Login
+                        </button>
+                    )}
+
                     {info && <p className="mt-4 text-green-500">{info}</p>}
                     {error && <p className="mt-4 text-red-500">{error}</p>}
                 </form>
-                <img
-                    src={loginIcon}
-                    alt="Contact Us"
-                    className="opacity-90 pl-3 rounded-xl hidden md:block md:w-1/2"
-                    style={{
-                        WebkitMaskImage: "radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)",
-                        maskImage: "radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)"
-                    }}
-                />
+                <img src={loginIcon} alt="Login Illustration" className="opacity-90 pl-3 rounded-xl hidden md:block md:w-1/2" />
             </div>
         </div>
     );

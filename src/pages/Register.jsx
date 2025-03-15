@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import loginIcon from "../assets/Login-amico.png";
 
@@ -42,21 +42,22 @@ function Register() {
             setInfo("");
         }
     };
+
     useEffect(() => {
         if (form.password !== form.confirmPassword) {
             setError("Passwords do not match!");
         } else {
             setError("");
         }
-    }, [form.password, form.confirmPassword]); 
-    
-
+    }, [form.password, form.confirmPassword]);
 
     return (
         <div className="flex items-center justify-center w-full min-h-screen p-4">
             <Helmet>
                 <title>Register - Shorterly</title>
-                <meta name="description" content="Register to Shorterly's URL Shortener and QR Code Generator." />
+                <meta name="description" content="Register to Shorterly's URL Shortener and QR Code Generator. Create your account and get started with shortening URLs and generating QR codes effortlessly." />
+                <meta name="keywords" content="Register, URL Shortener, QR Code Generator, Shorterly Registration, Create Account" />
+                <meta name="robots" content="index, follow" />
             </Helmet>
             <div className='bg-[#FBD8C4] w-full max-w-4xl rounded-lg p-8 flex flex-col md:flex-row shadow-lg'>
                 <form className='w-full md:w-1/2' onSubmit={handleSubmit}>
