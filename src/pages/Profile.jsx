@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import profilePic from "../assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, setUser } from "../store/auth";
-import History from "../components/History";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -35,14 +34,17 @@ function Profile() {
         dispatch(logout());
     };
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/url/get_by_email/${user.email}`).then((res) => {
-            setHistory(res.data);
+        if (user?.email) {
+            axios.get(`${process.env.REACT_APP_BASE_URL}/url/get_by_email/${user.email}`)
+                .then((res) => {
+                    setHistory(res.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
-        ).catch((error) => {
-            console.error(error);
-        }
-        );
-    }, [user?._id]);
+    }, [user?.email]); // ✅ Now includes user.email
+    
     useEffect(() => {
         if (!user) {
             navigate("/login");

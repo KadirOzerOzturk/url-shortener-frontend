@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const {user,isAuthenticated} = useSelector(state => state.auth);
+  const {isAuthenticated} = useSelector(state => state.auth);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);

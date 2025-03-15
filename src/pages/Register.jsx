@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import loginIcon from "../assets/Login-amico.png";
-import { use } from 'react';
 
 function Register() {
     const [form, setForm] = useState({
@@ -44,14 +43,13 @@ function Register() {
         }
     };
     useEffect(() => {
-        
         if (form.password !== form.confirmPassword) {
             setError("Passwords do not match!");
         } else {
             setError("");
         }
-        
-    }, [form.confirmPassword])
+    }, [form.password, form.confirmPassword]); 
+    
 
 
     return (
