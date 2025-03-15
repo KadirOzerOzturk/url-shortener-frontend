@@ -13,7 +13,7 @@ function Home() {
     const shorten = (e) => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/url/shorten`, {
             original_url: url,
-            ...(user ? { userEmail: user.email } : {})
+            ...(user ? { user_email: user.email } : {})
             })
             .then((response) => {
                 setShortenedUrl(response.data.shortened_url); // Update the shortened URL
