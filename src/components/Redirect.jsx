@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Footer from "../components/Footer"; // Footer'ı içe aktar
 
 const Redirect = () => {
   const { shortUrl } = useParams();
