@@ -13,9 +13,10 @@ const authSlice = createSlice({
             state.user = action.payload;
         },
         logout(state) {
+            localStorage.removeItem("user");
             state.isAuthenticated = false;
             state.user = null;
-        },
+        },        
         setUser(state, action) {
             state.user = action.payload;
         }

@@ -4,17 +4,19 @@ import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import loginIcon from "../assets/Login-amico.png";
 import { login } from '../store/auth';
+import { useNavigate } from 'react-router-dom';
 function Login() {
     const [form, setForm] = useState({
         email: "",
         password: ""
     });
-    
+
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [info, setInfo] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-
+    const [pendingApiCall, setPendingApiCall] = useState(false);
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -22,6 +24,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            setPendingApiCall(true);
             const requestData = { ...form };
             const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, requestData);
 
@@ -34,13 +37,16 @@ function Login() {
                 setError("");
                 dispatch(login(res.data.user));
                 localStorage.setItem("user", JSON.stringify(res.data.user));
+                navigate("/profile");
+                setPendingApiCall(false);
             }
         } catch (error) {
             console.error(error);
             setError(error.response?.data?.message || 'Something went wrong! Please try again later');
             setInfo("");
+            setPendingApiCall(false);
         }
-        
+
     };
 
     const toggleShowPassword = () => {
@@ -49,20 +55,21 @@ function Login() {
 
     return (
         <div className="flex items-center justify-center w-full min-h-screen p-4">
-           <Helmet>
-    <title>Login - Shorterly</title>
-    <meta name="description" content="Login to Shorterly to access your URL shortener and QR code generator dashboard." />
-    <meta name="keywords" content="Login, URL shortener, QR code generator, Shorterly" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Login - Shorterly" />
-    <meta property="og:description" content="Login to Shorterly to access your URL shortener and QR code generator dashboard." />
-    <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
-    <meta property="og:url" content="https://www.shorterly.net/login" />
-</Helmet>
+            <Helmet>
+                <title>Login - Shorterly</title>
+                <meta name="description" content="Login to Shorterly to access your URL shortener and QR code generator dashboard." />
+                <meta name="keywords" content="Login, URL shortener, QR code generator, Shorterly" />
+                <meta name="robots" content="index, follow" />
+                <meta property="og:title" content="Login - Shorterly" />
+                <meta property="og:description" content="Login to Shorterly to access your URL shortener and QR code generator dashboard." />
+                <meta property="og:image" content={process.env.REACT_APP_MAIN_ICON} />
+                <meta property="og:url" content="https://www.shorterly.net/login" />
+            </Helmet>
 
             <div className='bg-[#FBD8C4] w-full max-w-4xl rounded-lg p-8 flex flex-col md:flex-row'>
                 <form className='w-full md:w-1/2'>
                     <h1 className='text-2xl font-bold mb-4 text-center'>Login</h1>
+
                     <input
                         type="email"
                         placeholder='Email'
@@ -88,13 +95,26 @@ function Login() {
                             {showPassword ? "Hide" : "Show"}
                         </button>
                     </div>
-                    <button
-                        type='submit'
-                        className='bg-blue-500 text-white px-4 py-2 rounded-lg'
-                        onClick={handleSubmit}
-                    >
-                        Login
-                    </button>
+                    {
+                        pendingApiCall ? (
+                            <button
+                                type='button'
+                                className='bg-blue-500 text-white px-4 py-2 rounded-lg'
+                                disabled
+                            >
+                                Logging in...
+                            </button>
+                        ) : (
+                            <button
+                                type='submit'
+                                className='bg-blue-500 text-white px-4 py-2 rounded-lg'
+                                onClick={handleSubmit}
+                            >
+                                Login
+                            </button>
+                        )
+
+                    }
                     {info && <p className="mt-4 text-green-500">{info}</p>}
                     {error && <p className="mt-4 text-red-500">{error}</p>}
                 </form>

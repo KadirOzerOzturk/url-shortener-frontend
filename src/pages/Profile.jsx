@@ -5,25 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout, setUser } from "../store/auth";
 import History from "../components/History";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
     const { user } = useSelector((state) => state.auth);
     const [bio, setBio] = useState("Full-stack developer & tech enthusiast! 🚀");
-    const [hobbies, setHobbies] = useState(["💻 Coding", "🎮 Gaming", "📷 Photography", "🌍 Traveling"]);
-    const [socialLinks, setSocialLinks] = useState({
-        LinkedIn: "",
-        GitHub: "",
-        Twitter: "",
-    });
     const [history, setHistory] = useState([]);
 
     const [editMode, setEditMode] = useState(false);
-    const [newName, setNewName] = useState(user.name);
+    const [newName, setNewName] = useState(user?.name);
     const [newBio, setNewBio] = useState(bio);
-    const [newHobbies, setNewHobbies] = useState(hobbies.join(", "));
-    const [newSocialLinks, setNewSocialLinks] = useState(socialLinks);
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const handleEdit = () => {
         setEditMode(!editMode);
     };
@@ -31,12 +25,13 @@ function Profile() {
     const saveChanges = () => {
         dispatch(setUser({ ...user, name: newName }));
         setBio(newBio);
-        setHobbies(newHobbies.split(",").map((h) => h.trim()));
-        setSocialLinks(newSocialLinks);
+        
         setEditMode(false);
     };
 
     const handleLogout = () => {
+        navigate("/login");
+
         dispatch(logout());
     };
     useEffect(() => {
@@ -47,8 +42,12 @@ function Profile() {
             console.error(error);
         }
         );
-    }, [user._id]);
-
+    }, [user?._id]);
+    useEffect(() => {
+        if (!user) {
+            navigate("/login");
+        }
+    }, [user, navigate]);
     const handleDelete = (e, shortened_url) => {
         axios.delete(`${process.env.REACT_APP_BASE_URL}/url/${shortened_url}`).then((res) => {
             setHistory(history.filter((item) => item.shortened_url !== shortened_url));
@@ -64,7 +63,6 @@ function Profile() {
             </Helmet>
 
             <div className="bg-[#FBD8C4] shadow-lg rounded-lg p-8 w-full max-w-4xl flex flex-col md:flex-row">
-                {/* Profile Section */}
                 <div className="flex flex-col items-center border-r border-gray-200 md:pr-8">
                     <img src={profilePic} alt="Profile" className="w-32 h-32 rounded-full shadow-md" />
                     {editMode ? (
@@ -75,7 +73,7 @@ function Profile() {
                             className="border border-gray-300 rounded-lg px-4 py-2 w-full text-center mt-4"
                         />
                     ) : (
-                        <h1 className="text-2xl font-bold text-gray-800 mt-4">{user.name}</h1>
+                        <h1 className="text-2xl font-bold text-gray-800 mt-4">{user?.name}</h1>
                     )}
 
                     {editMode ? (
@@ -88,44 +86,7 @@ function Profile() {
                         <p className="text-gray-600 text-lg mt-2 text-center">{bio}</p>
                     )}
 
-                    {/* Hobbies */}
-                    <div className="mt-4 w-full">
-                        <h2 className="text-lg font-semibold text-gray-800">Hobbies</h2>
-                        {editMode ? (
-                            <input
-                                type="text"
-                                value={newHobbies}
-                                onChange={(e) => setNewHobbies(e.target.value)}
-                                className="border border-gray-300 rounded-lg px-4 py-2 w-full mt-2"
-                            />
-                        ) : (
-                            <div className="flex flex-wrap justify-center gap-2 mt-2 text-gray-700 text-sm">
-                                {hobbies.map((hobby, index) => (
-                                    <span key={index} className="bg-gray-200 px-3 py-1 rounded-full">
-                                        {hobby}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Social Links */}
-                    <div className="mt-6 w-full">
-                        <h2 className="text-lg font-semibold text-gray-800">Connect with me</h2>
-                        <div className="flex flex-wrap gap-4 mt-2">
-                            {Object.entries(socialLinks).map(([platform, link]) => (
-                                <a
-                                    key={platform}
-                                    href={link || "#"}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-blue-600 text-white px-4 py-2 rounded-lg w-full text-center hover:bg-blue-700 transition-all"
-                                >
-                                    {link === "" ? "-" : platform}
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+                   
 
                     {/* Edit / Logout Buttons */}
                     <div className="flex justify-between w-full mt-6">

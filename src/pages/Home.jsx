@@ -2,14 +2,19 @@ import React, { useState } from 'react'
 import History from '../components/History'
 import axios from 'axios'
 import { Helmet } from 'react-helmet';
+import { useSelector } from 'react-redux';
 
 function Home() {
     const [url, setUrl] = useState('');
+    const { user } = useSelector((state) => state.auth);
     const [shortenedUrl, setShortenedUrl] = useState('');
     const [isShortened, setIsShortened] = useState(false);
 
     const shorten = (e) => {
-        axios.post(`${process.env.REACT_APP_BASE_URL}/url/shorten`, { original_url: url })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/url/shorten`, {
+            original_url: url,
+            ...(user ? { userEmail: user.email } : {})
+            })
             .then((response) => {
                 setShortenedUrl(response.data.shortened_url); // Update the shortened URL
                 setIsShortened(true)
@@ -53,7 +58,7 @@ function Home() {
 
             {shortenedUrl && (
                 <div className="mt-4 text-center text-xl text-gray-700">
-                    <p>Shortened URL: <a href={shortenedUrl} target="_blank" rel="noopener noreferrer" className="text-purple-700">{shortenedUrl}</a></p>
+                    <p>Shortened URL: <a href={process.env.REACT_APP_REDIRECT_URL + "/" + shortenedUrl} target="_blank" rel="noopener noreferrer" className="text-purple-700">{process.env.REACT_APP_REDIRECT_URL + "/" + shortenedUrl}</a></p>
                 </div>
             )}
 

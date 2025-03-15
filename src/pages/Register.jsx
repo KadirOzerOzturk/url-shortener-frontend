@@ -25,10 +25,10 @@ function Register() {
         e.preventDefault();
         try {
             const requestData = { ...form };
-            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/Register`, requestData);
+            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`, requestData);
 
-            if (res.status === 200) {
-                setInfo("Email sent successfully!");
+            if (res.status === 201) {
+                setInfo("User registered successfully!");
                 setForm({
                     name: "",
                     surname: "",
