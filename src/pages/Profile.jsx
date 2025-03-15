@@ -124,7 +124,7 @@ function Profile() {
                                 {history.length >0 ? history.map((item) => (
                                     <tr key={item.id} className="hover:bg-[#f3c6ae] transition-all">
                                         <td className="border px-4 py-2 truncate max-w-[150px]">
-                                            <a href={`${process.env.REACT_APP_REDIRECT_URL}${item.shortened_url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                            <a href={`${process.env.REACT_APP_REDIRECT_URL}+"/"+${item.shortened_url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                                                 {process.env.REACT_APP_REDIRECT_URL +"/"+ item.shortened_url}
                                             </a>
                                         </td>
