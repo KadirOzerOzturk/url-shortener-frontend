@@ -53,20 +53,21 @@ function Navbar() {
         </div>
 
         {/* Desktop Login/Register Buttons */}
-        {isAuthenticated ? (
-          <a href="/profile" className="rounded-xl bg-gray-800 text-white px-6 py-2">
-            My Profile
-          </a>
-        ) : (
-          <div className="hidden sm:flex space-x-2">
-            <a href="/login" className="rounded-xl bg-gray-800 text-white px-6 py-2">
-              Login
-            </a>
-            <a href="/register" className="rounded-xl bg-[#144EE3] px-6 py-2 text-white">
-              Register Now
-            </a>
-          </div>
-        )}
+{isAuthenticated ? (
+  <a href="/profile" className="rounded-xl bg-gray-800 text-white px-6 py-2 hidden sm:inline-block">
+    My Profile
+  </a>
+) : (
+  <div className="hidden sm:flex space-x-2">
+    <a href="/login" className="rounded-xl bg-gray-800 text-white px-6 py-2">
+      Login
+    </a>
+    <a href="/register" className="rounded-xl bg-[#144EE3] px-6 py-2 text-white">
+      Register Now
+    </a>
+  </div>
+)}
+
 
         
        

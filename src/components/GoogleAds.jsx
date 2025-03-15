@@ -35,8 +35,8 @@ function GoogleAds() {
           width: "300px",  // Genişlik
           height: "250px", // Yükseklik
         }}
-        data-ad-client="ca-pub-3367723680642426" 
-        data-ad-slot="1006343378"  
+       data-ad-client ={process.env.REACT_APP_ADSENSE_CLIENT} 
+       data-ad-slot={process.env.REACT_APP_ADSENSE_SLOT}  
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>

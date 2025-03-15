@@ -25,8 +25,8 @@ function Home() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 min-h-screen ">
-            <Helmet>
+        <div className="flex flex-col items-center justify-center text-center w-full p-6">
+                        <Helmet>
                 <title>Shorterly - URL Shortener</title>
                 <meta name="description" content="Welcome to Shorterly, where you can shorten your URLs easily and quickly!" />
                 <meta name="keywords" content="URL shortener, shorten links, free URL shortener" />
@@ -51,8 +51,8 @@ function Home() {
                     style={{
                         display: "block",
                     }}
-                    data-ad-client="ca-pub-3367723680642426"
-                    data-ad-slot="1006343378"
+                   data-ad-client ={process.env.REACT_APP_ADSENSE_CLIENT}
+                   data-ad-slot={process.env.REACT_APP_ADSENSE_SLOT}
                     data-ad-format="auto"
                     data-full-width-responsive="true"
                 ></ins>
@@ -115,8 +115,8 @@ function Home() {
                     style={{
                         display: "block",
                     }}
-                    data-ad-client="ca-pub-3367723680642426"
-                    data-ad-slot="1006343378"
+                   data-ad-client ={process.env.REACT_APP_ADSENSE_CLIENT}
+                   data-ad-slot={process.env.REACT_APP_ADSENSE_SLOT}
                     data-ad-format="auto"
                     data-full-width-responsive="true"
                 ></ins>
