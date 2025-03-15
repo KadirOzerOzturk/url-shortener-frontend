@@ -116,7 +116,7 @@ function Profile() {
                                 <tr>
                                     <th className="px-4 py-2 border">Shortened URL</th>
                                     <th className="px-4 py-2 border">Original URL</th>
-                                    <th className="px-4 py-2 border">Date</th>
+                                    <th className="px-4 py-2 border">Expire Date</th>
                                     <th className="px-4 py-2 border">Actions</th>
                                 </tr>
                             </thead>
@@ -125,13 +125,13 @@ function Profile() {
                                     <tr key={item.id} className="hover:bg-[#f3c6ae] transition-all">
                                         <td className="border px-4 py-2 truncate max-w-[150px]">
                                             <a href={`${process.env.REACT_APP_REDIRECT_URL}${item.shortened_url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                                                {process.env.REACT_APP_REDIRECT_URL + item.shortened_url}
+                                                {process.env.REACT_APP_REDIRECT_URL +"/"+ item.shortened_url}
                                             </a>
                                         </td>
                                         <td className="border px-4 py-2 truncate max-w-[150px]" title={item.original_url}>
                                             {item.original_url.length >= 15 ? item.original_url.slice(0, 15) + "..." : item.original_url}
                                         </td>
-                                        <td className="border px-4 py-2">{new Date(item.date).toLocaleDateString()}</td>
+                                        <td className="border px-4 py-2">{new Date(item.expires_at).toLocaleDateString()}</td>
                                         <td className="border px-4 py-2 text-red-500 cursor-pointer hover:text-red-700" onClick={(e) => handleDelete(e, item.shortened_url)}>
                                             Delete
                                         </td>
